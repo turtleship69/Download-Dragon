@@ -3,12 +3,15 @@ import os
 from flask import Flask, request
 from pathlib import Path
 
+#set current path to path script is running from 
+#print(Path(__file__).parent.resolve())
+os.chdir(Path(__file__).parent.resolve())
 
-with open('./Download Dragon/config.json', 'r') as f:
+with open('Download Dragon/config.json', 'r') as f:
     #print(f.read())
     config = json.load(f)
 
-os.chdir(str(Path.home() / "Downloads"))
+
 
 if config['runLocalServer']:
     host = config['serverHost']
@@ -16,12 +19,14 @@ if config['runLocalServer']:
 
     app = Flask(__name__)
 
+    os.chdir(str(Path.home() / "Downloads"))
+
     @app.route('/download', methods=['POST'])
     def download():
         url = request.json['url']
         audio_only = request.json.get('audioOnly', False)
 
-        command = f"yt-dlp {url}"
+        command = f"yt-dlp --no-mtime {url}"
 
         if audio_only:
             command+=" --extract-audio --audio-format mp3"

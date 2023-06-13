@@ -1,0 +1,6 @@
+{
+    "serverHost": "0.0.0.0",
+    "clientHost": "127.0.0.1",
+    "port": 5000,
+    "runLocalServer": true
+}
