@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 const url = `http://${clientHost}:${port}/download`;
                 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
                     var inputUrl = document.getElementById('url').value;
+                    var statusElement = document.createElement('div');
+                    statusElement.style.backgroundColor = 'blue';
+                    statusElement.innerText = 'Downloading';
+                    document.body.appendChild(statusElement);
                     fetch(url, {
                         method: 'POST',
                         headers: {
@@ -23,6 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         .then(response => response.json())
                         .then(data => {
                             console.log(data);
+                            if (data.status === 'success') {
+                                statusElement.style.backgroundColor = 'green';
+                                statusElement.innerText = 'Downloaded';
+                            } else {
+                                statusElement.style.backgroundColor = 'red';
+                                statusElement.innerText = data.message;
+                            }
+                            document.body.appendChild(statusElement);
                         });
                 });
             });

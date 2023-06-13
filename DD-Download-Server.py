@@ -26,13 +26,15 @@ if config['runLocalServer']:
         url = request.json['url']
         audio_only = request.json.get('audioOnly', False)
 
-        command = f"yt-dlp --no-mtime {url}"
+        command = f"yt-dlp --no-mtime --no-colors {url}"
 
         if audio_only:
-            command+=" --extract-audio --audio-format mp3"
+            command += ' --extract-audio --audio-format mp3 -o "%(title)s.%(ext)s"'
 
+        print("\033[34m") # set output color to blue
         print(command)
         os.system(command)
+        print("\033[0m")
 
         print("downloaded")
 
