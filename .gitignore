@@ -1,2 +1,20 @@
 Download Dragon.pem
 __pycache__/
+server stdout.txt
+flask/
+werkzeug/
+markupsafe/
+click/
+backend/*
+!backend/server.py
+#!backend\ffmpeg\ffmpeg.exe
+!backend/ffmpeg/
+backend/start dd.bat
+backend/StartBackgroundTask.pyw
+script stdout.txt
+.vscode/settings.json
+
+backend/ffmpeg/ffmpeg.exe
+backend/ffmpeg/ffplay.exe
+backend/ffmpeg/ffprobe.exe
+backend/ffmpeg/LICENSE
